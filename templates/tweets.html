@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thought Board</title>
+</head>
+<body>
+    <h1>Hi {{ user_data['first_name'] }}!</h1>
+    <a href="/on_logout">Logout</a>
+    
+    <div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+        <form action="/on_tweet" method="POST">
+            <textarea name="tweet_content" cols="30" rows="8"></textarea>
+            <input type="submit" value= Add_Thought!>
+        </form>
+    </div>
+    <hr>
+    {% for tweet in tweets %}
+        <p>{{tweet['first_name']}} {{tweet['last_name']}} says: {{tweet['tweet']}}</p>
+        {% if session['user_id'] == tweet.author %}
+        <a href="/on_delete/{{tweet['id_tweet']}}"><button>Delete</button></a>
+        <a href="/edit/{{tweet['id_tweet']}}"><button>Edit</button></a>
+        {% endif %}
+        <a href="/like/{{tweet['id_tweet']}}"><button>Like</button></a>
+        <a href="/unlike/{{tweet['id_tweet']}}"><button>Unlike</button></a>
+        <a href="/details/{{tweet['id_tweet']}}"><button>Details</button></a>
+    {% endfor %}
+</body>
+</html>

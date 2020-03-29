@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thought Board</title>
+</head>
+<body>
+    <p>{{tweet_data['first_name']}} {{tweet_data['last_name']}} says:</p>
+    <p>{{tweet_data['tweet']}} </p>
+    <hr>
+    <h3>People who liked this thought:</h3>
+    <ul>
+        {% for user in like_data %}
+            <li>{{user['first_name']}} {{user['last_name']}}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+</body>
+</html>
